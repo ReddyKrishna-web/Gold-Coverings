@@ -7,6 +7,9 @@
     "apps/*",
     "packages/*"
   ],
+  "prisma": {
+  "schema": "packages/db/prisma/schema.prisma"
+  },
   "scripts": {
     "dev": "concurrently -n website,store -c yellow,magenta \"npm:dev:website\" \"npm:dev:store\"",
     "dev:website": "npm run dev -w @uma/website",
