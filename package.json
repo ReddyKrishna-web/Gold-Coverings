@@ -1,0 +1,41 @@
+{
+  "name": "uma-fashions",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Uma Fashions — luxury gold-covering jewellery brand website and online store",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n website,store -c yellow,magenta \"npm:dev:website\" \"npm:dev:store\"",
+    "dev:website": "npm run dev -w @uma/website",
+    "dev:store": "npm run dev -w @uma/store",
+    "build": "npm run build -w @uma/website && npm run build -w @uma/store",
+    "build:website": "npm run build -w @uma/website",
+    "build:store": "npm run build -w @uma/store",
+    "lint": "npm run lint -w @uma/website && npm run lint -w @uma/store",
+    "typecheck": "npm run typecheck -w @uma/website && npm run typecheck -w @uma/store",
+    "test": "tsx --test apps/store/src/lib/pricing.test.ts apps/store/src/lib/razorpay.test.ts",
+    "db:generate": "prisma generate --schema packages/db/prisma/schema.prisma",
+    "db:migrate": "prisma migrate dev --schema packages/db/prisma/schema.prisma",
+    "db:deploy": "prisma migrate deploy --schema packages/db/prisma/schema.prisma",
+    "db:push": "prisma db push --schema packages/db/prisma/schema.prisma",
+    "db:seed": "tsx packages/db/src/seed.ts",
+    "db:bootstrap": "tsx packages/db/src/bootstrap.ts",
+    "verify:deploy": "node scripts/verify-deployment.mjs",
+    "postinstall": "prisma generate --schema packages/db/prisma/schema.prisma"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
+    "playwright-core": "^1.64.1",
+    "prisma": "^6.19.3",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=18.18"
+  }
+}

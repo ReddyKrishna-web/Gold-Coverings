@@ -1,0 +1,234 @@
+# PRODUCT REQUIREMENTS DOCUMENT (PRD)
+## Gold Covering Jewellery Brand Website
+
+**Document version:** 1.0  
+**Project type:** Customer-facing brand website  
+**Working brand name:** Uma Fashions (confirm with the client before launch)  
+**Status:** Requirements baseline — obtain client approval before building
+
+---
+
+## 1. Purpose
+
+Create an elegant, responsive website for a business selling gold-covering/gold-plated jewellery and ladies' accessories. The website introduces the brand, showcases verified collections, builds trust, and directs visitors to contact the store or continue to the shopping web application.
+
+This document defines product requirements and implementation/deployment expectations. It is a PRD, not a substitute for testing or client approval.
+
+## 2. Goals and success criteria
+
+- Present a premium, artistic visual identity using a restrained gold palette.
+- Make the business, product categories, contact information, and policies easy to find.
+- Work smoothly on mobile, tablet, and desktop.
+- Load images efficiently and provide accessible navigation.
+- Give the owner a simple, documented process to update content.
+- Deploy to a live HTTPS URL and hand over ownership and access safely.
+
+**Success checks:** all agreed pages are complete; no placeholder text remains; client approves content; links and mobile navigation work; production build passes; site is live over HTTPS; accessibility and performance basics are reviewed.
+
+## 3. Users
+
+- **Potential customer:** explores collections, learns about the business, and contacts the store.
+- **Returning customer:** revisits products and uses contact/social links.
+- **Store owner:** confirms the brand story, product images, policies, and business information.
+- **Developer/content editor:** maintains code and updates approved content.
+
+## 4. Scope
+
+### In scope
+- Responsive home page
+- Collections/category showcase
+- About/story section or page
+- Gallery/lookbook
+- Contact page/section
+- Approved policy pages/links
+- Footer with verified store and owner information
+- Search-engine metadata, favicon, sitemap, and robots rules
+- Subtle scroll/hover animations with reduced-motion support
+- Git-based source control and deployment
+
+### Out of scope unless separately approved
+- Customer accounts, shopping cart, checkout, payment processing, order tracking
+- Inventory/admin dashboard
+- Automated emails, SMS, loyalty points, reviews, back-in-stock alerts
+- Custom domain purchase, paid photography, paid hosting, paid third-party services
+
+These commerce features belong in the separate **Gold Covering Jewellery Web Application PRD**.
+
+## 5. Brand and design requirements
+
+- **Visual direction:** luxury, warm, editorial, artistic, uncluttered.
+- **Palette:** warm ivory, espresso/brown, muted gold, champagne highlights, accessible neutral text.
+- **Fonts:** Cormorant Garamond for headings; Jost for body text, navigation, and buttons.
+- **Motion:** restrained liquid-gold shimmer, smooth section reveals, gentle parallax where appropriate, and polished hover states. Avoid motion that blocks reading or harms performance.
+- **Accessibility:** respect `prefers-reduced-motion`; keyboard-operable navigation; visible focus; descriptive alt text; sufficient contrast; form labels.
+- **Photography:** use client-approved product images with consistent lighting and accurate colour. Compress images and avoid layout shift.
+
+## 6. Information architecture and requirements
+
+### 6.1 Home
+- Brand header and responsive navigation.
+- Hero image, concise brand statement, and primary call to action.
+- Featured collections.
+- Featured products or lookbook cards, based only on real stock/content.
+- Brand story and approved trust information.
+- Contact call to action and complete footer.
+
+**Acceptance criteria:** primary CTA works; all featured cards link to valid destinations; layout adapts to narrow screens; no unapproved product claims.
+
+### 6.2 Collections
+- Show only categories actually sold by the business.
+- Candidate categories may include earrings, necklaces, chains, bangles, jewellery sets, and ladies' accessories; confirm the final list with the owner.
+- Each card has an image, accessible text, and working destination.
+
+**Acceptance criteria:** no dead links or misleading category names; images have alt text.
+
+### 6.3 About
+- Approved business story, location context, and approach to product selection.
+- Do not invent years in business, craftsmanship claims, certifications, or customer numbers.
+
+**Acceptance criteria:** all factual claims are approved by the client.
+
+### 6.4 Gallery/lookbook
+- Curated product/lifestyle images.
+- Optimized responsive image sizes.
+- Image permissions confirmed.
+
+### 6.5 Contact
+- Verified phone number, address, business hours, map link, and approved social/WhatsApp links.
+- Use click-to-call links on mobile where suitable.
+
+**Acceptance criteria:** every contact link is tested; do not expose personal details without owner approval.
+
+### 6.6 Policies
+- Link to client-approved privacy, shipping, return/exchange, and terms information.
+- Do not write unsupported legal guarantees or publish unreviewed tax statements.
+
+### 6.7 Footer
+- Verified store name and owner details, if approved for publication.
+- Address, phone, hours, social links, and policy links.
+- Copyright notice.
+
+**Acceptance criteria:** no `[BRACKET]` placeholders remain; owner explicitly approves public display of their details.
+
+## 7. Content accuracy and compliance requirements
+
+- Describe products accurately as **gold covering** or **gold-plated**, as applicable.
+- Do not claim “pure gold,” solid gold, purity, hallmarking, or certification unless accurate and independently documented.
+- Use only authorized logos, images, testimonials, and customer content.
+- All prices, product descriptions, contact information, business identifiers, and policies must be supplied or verified by the owner.
+- Any GSTIN or other legal identifier must be provided and checked by the business owner; never fabricate one.
+
+## 8. Technical requirements
+
+Recommended implementation:
+- Next.js 14 with TypeScript and App Router, subject to compatibility checks.
+- Tailwind CSS and accessible reusable UI components.
+- CSS transitions for simple motion; optional motion library only if needed.
+- Next.js image optimization where supported.
+- Git and GitHub for version control.
+- Vercel or Netlify as candidate hosting providers; check current plan terms and framework support before choosing.
+
+### Non-functional requirements
+- Responsive from small phones to desktop.
+- Semantic HTML, keyboard navigation, alt text, focus states, reduced-motion support.
+- Unique page titles and descriptions.
+- Optimized images and minimal unnecessary JavaScript.
+- No secrets, private documents, or customer data in public assets or Git.
+- Clear README with install, run, build, and deploy instructions.
+
+## 9. Build workflow
+
+1. Get written approval for the plan, scope, brand, content, images, and policies.
+2. Confirm business name, owner details, address, phone, categories, hours, and URLs.
+3. Install supported Node.js LTS, Git, and VS Code on Windows.
+4. Create the Next.js project and run it locally.
+5. Implement shared header/footer and design tokens.
+6. Build the home, collections, about, gallery, contact, and policy routes.
+7. Add responsive styling, motion, metadata, and optimized imagery.
+8. Run lint and production build; test all routes and devices.
+9. Push source to GitHub without secrets.
+10. Deploy a preview and obtain client approval.
+11. Deploy production, verify HTTPS/domain and all links, and hand over access.
+
+Typical commands (run in PowerShell after installing Node.js and Git):
+
+```powershell
+npx create-next-app@14 uma-fashions-website
+cd uma-fashions-website
+npm run dev
+npm run lint
+npm run build
+```
+
+Use the CLI prompts to select TypeScript, Tailwind, App Router, ESLint, and the recommended import alias. Open `http://localhost:3000` for local development.
+
+## 10. Free/low-cost deployment requirements
+
+Potential options to evaluate:
+- **Vercel:** convenient for Next.js; verify current Hobby eligibility, commercial-use terms, usage quotas, and features.
+- **Netlify:** alternative hosting; verify current Next.js adapter/feature compatibility and credit limits.
+- **Render Static Sites or GitHub Pages:** only suitable if the site is built as a compatible static export; not a replacement for server features.
+
+Official references:
+- Next.js deployment: https://nextjs.org/docs/app/getting-started/deploying
+- Vercel pricing: https://vercel.com/pricing
+- Netlify pricing: https://www.netlify.com/pricing/
+- Render free services: https://render.com/docs/free
+- GitHub: https://github.com/
+
+Free tiers can change and may restrict commercial use or impose usage limits. A custom domain usually costs money. Confirm current terms before promising free production hosting to the client.
+
+## 11. Testing and acceptance
+
+- Test every route and all internal/external links.
+- Test navigation and layout on phone, tablet, and desktop.
+- Test keyboard navigation, focus visibility, contrast, image alt text, and reduced motion.
+- Check page titles, descriptions, favicon, sitemap, and robots rules.
+- Run `npm run lint` and `npm run build`.
+- Check image sizes, loading behaviour, and horizontal overflow.
+- Confirm no placeholder copy, broken images, console errors, or unsupported claims.
+- Obtain written client approval of the live version.
+
+## 12. Deployment and handover
+
+- Create a GitHub repository and push only reviewed source code.
+- Import the repository into the selected host and use the detected framework defaults unless there is a documented reason to change them.
+- Test the deployment URL before adding a custom domain.
+- Configure DNS using only the records supplied by the hosting provider.
+- Verify HTTPS, canonical domain, redirects, and live links.
+- Keep the client as owner/admin of domain, repository, and hosting accounts where possible; use MFA and least-privilege access.
+- Provide a short README describing how to run locally, update content, deploy changes, and report issues.
+- Agree on maintenance responsibility and whether a paid tier will be required as traffic grows.
+
+## 13. Risks and mitigations
+
+- **Incorrect business details:** require owner verification before publishing.
+- **Misleading product claims:** use accurate gold-covering/gold-plated descriptions and obtain approval.
+- **Free-tier changes:** verify terms before launch; document migration options.
+- **Slow images/animations:** optimize assets, reduce motion, and test on mobile.
+- **Account ownership confusion:** keep client ownership clear and document access.
+- **Scope creep:** keep commerce functionality in the separate application project unless added through an approved change.
+
+## 14. Open questions before build
+
+- Final public store name and logo?
+- Which product categories are actually sold?
+- Which owner details may be published?
+- Verified address, phone, hours, and social URLs?
+- Which policy text has the owner approved?
+- Is this website informational only, or should it link to the shopping application?
+- Does the client own a domain already?
+- Which host's current free-tier terms are acceptable?
+
+## 15. Sign-off checklist
+
+- [ ] Scope and design approved by client.
+- [ ] Product categories, imagery, and claims approved.
+- [ ] Contact and owner details verified.
+- [ ] Policy content approved.
+- [ ] All placeholders removed.
+- [ ] Lint and production build pass.
+- [ ] Responsive and accessibility checks completed.
+- [ ] Deployment and HTTPS verified.
+- [ ] Hosting/domain ownership and handover agreed.
+- [ ] Client approved the live URL.

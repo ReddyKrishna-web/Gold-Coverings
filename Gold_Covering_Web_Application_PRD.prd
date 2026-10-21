@@ -1,0 +1,406 @@
+# PRODUCT REQUIREMENTS DOCUMENT (PRD)
+## Gold Covering Jewellery E-commerce Web Application
+
+**Document version:** 1.0  
+**Project type:** Full-stack e-commerce application  
+**Working brand name:** Uma Fashions (confirm with the client before launch)  
+**Status:** Requirements baseline — obtain client approval before building
+
+---
+
+## 1. Purpose
+
+Build a secure e-commerce web application for a business selling gold-covering/gold-plated jewellery and ladies' accessories. Customers can browse products, use a cart, checkout using Razorpay or eligible cash on delivery (COD), and track orders. Authorized staff and the owner can manage products, inventory, orders, coupons, and business reporting.
+
+This document describes requirements and implementation/deployment expectations. It is not a substitute for payment-provider approval, security review, or professional tax/legal advice.
+
+## 2. Goals and success criteria
+
+- Deliver a responsive, reliable customer shopping flow.
+- Keep prices, stock, discounts, shipping, and order states authoritative on the server.
+- Provide separate customer, staff, and owner permissions.
+- Integrate Razorpay using server-side verification and verified webhooks.
+- Protect customer information and business secrets.
+- Provide a documented deployment, database migration, backup, and handover process.
+- Use free-tier services for development/demo where practical, while evaluating commercial reliability before real transactions.
+
+## 3. User roles
+
+### Guest
+- Browse catalog, search/filter/sort products, view details, and add products to a session cart.
+- Cannot access private orders, addresses, account pages, or admin routes.
+
+### Customer
+- Manage profile and addresses.
+- Maintain wishlist.
+- Checkout with available payment methods.
+- View own orders and status history.
+- Submit reviews or return/exchange requests where eligible.
+- Receive back-in-stock alerts if that feature is implemented and consent is obtained.
+
+### Staff
+- Perform only assigned catalog, stock, and order tasks.
+- Cannot change owner-only security, payment, or store settings unless explicitly granted.
+
+### Owner
+- Manage users/roles, products, variants, inventory, orders, coupons, store settings, reports, and approved tax/shipping configuration.
+
+**Requirement:** every protected operation must enforce authorization on the server. Hiding a UI button is not security.
+
+## 4. Scope and priorities
+
+### P0 — launch essentials
+- Catalog, categories, search, filters, sorting, product details
+- Cart and server-validated pricing
+- Customer authentication and addresses
+- Razorpay test/production integration with signature verification and webhooks
+- COD with owner-configured eligibility
+- Order creation, status history, customer order list and tracking fields
+- Owner/staff authentication and role checks
+- Product/stock/order management
+- PostgreSQL persistence, validation, logging, backup/export plan
+- Responsive UI, privacy/policy content, deployment
+
+### P1 — business operations
+- Coupons and promotions
+- Low-stock alerts and inventory movement history
+- Dashboard metrics and charts
+- Invoice fields and invoice generation after tax requirements are confirmed
+- Returns/exchanges workflow
+- Reviews and ratings with moderation
+
+### P2 — optional enhancements
+- Wishlist
+- Back-in-stock alerts
+- Loyalty points ledger
+- Email/SMS notifications
+- Advanced analytics and exports
+
+Do not claim a feature is complete until it is implemented and tested. If schedule or budget is limited, launch P0 first.
+
+## 5. Product catalog requirements
+
+Product data should support:
+- Product name, slug, description, category, SKU, active/inactive status
+- Multiple images and alt text
+- Variants/options and SKU-level inventory where relevant
+- Current selling price, MRP/reference price where lawful and accurate, discount display
+- Stock status, low-stock threshold, product-care information
+- Search terms, tags, timestamps
+- Product reviews only if moderation and abuse handling are implemented
+
+**Acceptance criteria:** search and filters return correct results; inactive products cannot be purchased; stock and price are rechecked on the server; invalid variants and quantities are rejected.
+
+## 6. Customer experience
+
+### Product details
+- Image gallery/zoom, description, variant selection, price, availability, care details, reviews if enabled.
+- Pincode/serviceability check only if a reliable serviceability rule/data source is configured.
+- Clear delivery, return/exchange, and product-material wording.
+
+### Cart
+- Add, remove, and change quantity.
+- Show item subtotal and a transparent breakdown of any shipping, discount, and tax.
+- Refresh server-authoritative prices and stock before checkout.
+- Prevent negative quantities, over-stock orders, and invalid coupons.
+
+### Checkout
+- Select/add address.
+- Recalculate all totals on the server.
+- Show payment methods available for the order and delivery location.
+- Prevent duplicate order creation from repeated clicks or retries.
+- Show a clear confirmation and order identifier after verified state changes.
+
+### Account and orders
+- Customers can view only their own data.
+- Display order number, items, total, payment state, current fulfilment status, and status history.
+- Provide cancellation/return actions only when allowed by documented business rules.
+
+## 7. Admin dashboard and operations
+
+Dashboard metrics:
+- Order count and sales over a selected date range
+- Definition of gross/net sales displayed clearly
+- Average order value
+- Low-stock items
+- Top-selling products
+- Recent orders and status filters
+
+Management:
+- Create/edit/disable products and variants.
+- Record inventory adjustments with reason, actor, timestamp, and quantity delta.
+- Update order status only through permitted transitions.
+- Manage coupons, shipping rules, return window, and approved store settings.
+- Manage staff accounts/roles with least privilege.
+- Log sensitive actions in an audit trail.
+
+## 8. Recommended technical architecture
+
+- **Framework:** Next.js 14 App Router + TypeScript.
+- **UI:** Tailwind CSS and accessible reusable components such as shadcn/ui.
+- **Database:** PostgreSQL, hosted by Neon or Supabase after reviewing current plan terms.
+- **ORM:** Prisma with migrations.
+- **Authentication:** maintained auth library compatible with the chosen Next.js version; secure sessions and role checks.
+- **Payments:** Razorpay Checkout and server-side Orders API, signature verification, and webhooks.
+- **Source control:** Git and GitHub.
+- **Hosting:** evaluate Vercel or another compatible Node.js host. Keep database and app environment configuration separate.
+
+Use supported compatible package versions and current official documentation. Avoid blindly copying outdated tutorials.
+
+## 9. Data model requirements
+
+Core entities:
+- User, role/permissions, and auth-related records required by the chosen library
+- Address
+- Category, Product, ProductImage, ProductVariant/SKU
+- InventoryMovement
+- Cart/CartItem or validated session cart
+- WishlistItem
+- Order, OrderItem, OrderStatusHistory
+- Payment and provider event/webhook identifiers
+- Coupon and CouponRedemption
+- Review and moderation status
+- ReturnRequest
+- LoyaltyLedger, if loyalty is enabled
+- BackInStockSubscription, if alerts are enabled
+- StoreSetting, AuditLog, invoice metadata
+
+Data rules:
+- Use integer minor currency units (paise for INR) or a suitable Decimal representation; never use binary floating-point arithmetic for money.
+- Store order-item snapshots of product name, SKU, unit price, and relevant tax data so catalog changes do not rewrite historical orders.
+- Add unique constraints and indexes for email, SKU, slug, order number, provider payment/order IDs, and common queries.
+- Use database transactions for operations that must succeed together, such as order confirmation and stock updates.
+- Define retention and deletion rules for customer information.
+
+## 10. Security and privacy requirements
+
+- Use secure, HTTP-only, SameSite cookies and HTTPS in production.
+- Use a maintained authentication library; never store plaintext passwords or implement custom cryptography.
+- Apply server-side role checks to every protected route, action, and database operation.
+- Validate all external input on the server, for example with Zod.
+- Use parameterized ORM queries; do not concatenate untrusted SQL.
+- Rate-limit login and other abuse-prone endpoints where practical.
+- Implement secure password reset/session expiry/revocation as supported by the auth solution.
+- Protect against CSRF according to the selected session/auth architecture.
+- Do not expose secrets in `NEXT_PUBLIC_` variables or browser bundles.
+- Do not log passwords, payment secrets, full payment details, or unnecessary personal data.
+- Store minimal customer data and restrict access by role.
+- Use audit logs for sensitive owner/staff actions.
+- Keep dependencies updated and define a process for security incidents and key rotation.
+
+## 11. Payment requirements: Razorpay
+
+- Use Razorpay test mode until the full integration passes.
+- Store key ID, key secret, and webhook secret as server-only environment variables.
+- Create payment orders on the server only after recalculating cart totals and validating stock.
+- Verify payment signatures server-side using the current official Razorpay documentation/SDK.
+- Configure webhooks over HTTPS; verify signatures against the raw request body and process events idempotently.
+- Do not mark an order paid based only on a browser callback or redirect.
+- Handle success, failure, cancel, retry, duplicate webhook, delayed webhook, and reconciliation cases.
+- Keep order and payment states separate and explicitly model their allowed transitions.
+- Do not store card details; payment data entry is handled by the provider.
+- Switch to live keys only after merchant activation, verification, client approval, and successful test-mode acceptance.
+
+Official docs: https://razorpay.com/docs/  
+Dashboard: https://dashboard.razorpay.com/
+
+## 12. COD requirements
+
+- Owner configures whether COD is available, eligible locations, maximum order amount if applicable, and any restrictions.
+- Validate COD eligibility on the server.
+- Track COD payment as unpaid/collect-on-delivery until collected.
+- Define cancellation, failed delivery, return, and reconciliation workflows.
+- Do not show COD if the order fails configured rules.
+
+## 13. Order and inventory rules
+
+Suggested order states:
+- `pending_payment`
+- `confirmed`
+- `processing`
+- `shipped`
+- `delivered`
+- `cancelled`
+- `return_requested`
+- `returned`
+- `refunded`
+
+Define permitted state transitions and record each change with timestamp and actor. Adapt states to the business's fulfilment process.
+
+Inventory requirements:
+- Validate stock when adding to cart and again at checkout.
+- Use transactions/locking or another safe concurrency strategy to prevent overselling.
+- Define when stock is reserved, decremented, released, and restored.
+- Record adjustments and reasons.
+- Alert when stock crosses a configurable threshold.
+- Reconcile payment and inventory state after failures, timeouts, and cancellations.
+
+## 14. Coupons, invoices, returns, loyalty
+
+- Coupons: server-side validity, start/end dates, usage limits, eligible products, minimum order amount, and stacking rules.
+- Invoices: confirm the owner's GST/tax configuration with a qualified professional; never invent a GSTIN or tax rate. Store required invoice snapshots and generate accurate documents only after the rules are approved.
+- Returns/exchanges: owner-approved time window, eligibility, product condition, shipping responsibility, and refund/exchange flow.
+- Loyalty: if enabled, use an append-only ledger for earning, redeeming, expiry, and reversal rather than only editing a balance.
+- Reviews: moderate abusive/fraudulent content and avoid publishing private information.
+- Back-in-stock alerts: collect consent, send only relevant notifications, and provide an unsubscribe path.
+
+## 15. Non-functional requirements
+
+- Responsive mobile-first interface and accessible forms/navigation.
+- Useful loading, empty, validation, and failure states.
+- Production build must pass; no known critical security issue at launch.
+- Server-authoritative money, stock, permissions, and payment states.
+- Structured logs that avoid secrets and unnecessary personal data.
+- Database backup/export and restore procedure documented and tested.
+- Monitoring for deploy failures, quotas, errors, payment webhook failures, and database health.
+- Environment separation between local, staging/test, and production.
+- Clear README and operational handover.
+
+## 16. Build plan and milestones
+
+1. **Planning:** confirm scope, client approvals, product data, policy text, payment and COD rules.
+2. **Foundation:** create Next.js app, shared layout, design system, Git repository.
+3. **Database:** provision PostgreSQL, define Prisma schema, migrations, seed development data.
+4. **Catalog:** listing, search, filters, product detail, admin catalog.
+5. **Cart and checkout preparation:** addresses, server-side pricing, shipping and tax rules.
+6. **Authentication and authorization:** customer, staff, owner roles; test access boundaries.
+7. **Orders and inventory:** transactions, status history, COD, tracking fields.
+8. **Payments:** Razorpay sandbox, signature verification, webhook idempotency and reconciliation.
+9. **Operations:** dashboard, coupons, invoices, returns and optional features.
+10. **Quality/security:** automated/manual tests, responsive/accessibility checks, threat review.
+11. **Deployment:** staging, migrations, secrets, payment webhook, smoke tests, backups.
+12. **Launch:** owner approval, live payment activation, monitoring and handover.
+
+## 17. Local setup and typical commands
+
+Install Node.js LTS, Git, and VS Code on Windows. Then:
+
+```powershell
+npx create-next-app@14 gold-covering-store --typescript --tailwind --eslint --app --src-dir --import-alias "@/*"
+cd gold-covering-store
+npm install prisma @prisma/client zod lucide-react
+npx prisma init
+npm run dev
+```
+
+Open `http://localhost:3000`. Configure a local `.env.local` with development-only credentials. The exact authentication, chart, email, and payment packages should be selected after checking current compatibility and official documentation.
+
+Typical checks:
+
+```powershell
+npm run lint
+npx prisma validate
+npx prisma generate
+npm run build
+```
+
+## 18. Environment variables and secrets
+
+Illustrative local `.env.local` names (values are placeholders, not real credentials):
+
+```dotenv
+DATABASE_URL="postgresql://..."
+AUTH_SECRET="generate-a-long-random-secret"
+APP_BASE_URL="http://localhost:3000"
+RAZORPAY_KEY_ID="rzp_test_..."
+RAZORPAY_KEY_SECRET="..."
+RAZORPAY_WEBHOOK_SECRET="..."
+```
+
+Use the exact variable names required by the selected libraries. Add local env files to `.gitignore`. Set production secrets only in the hosting provider's encrypted environment settings. Never commit credentials or paste them into public issues or screenshots.
+
+## 19. Free hosting and deployment options
+
+Candidate services to evaluate:
+- **Vercel:** convenient for Next.js app hosting. Verify current Hobby eligibility, commercial-use terms, function limits, usage quotas, and framework support.
+- **Neon:** PostgreSQL option with a free tier; review compute/storage quotas, pooling, backups, and current terms.
+- **Supabase:** alternative PostgreSQL platform with optional auth/storage; review project pausing, quotas, backup and storage rules.
+- **Netlify:** alternative host; confirm the required Next.js features are supported by the current adapter and that credit limits fit.
+- **Render:** can host Node services, but free services may spin down and the free PostgreSQL offering has expiry/retention limits. Do not rely on an expiring free database as the only copy of real customer orders.
+- **GitHub:** source repository and deployment integration; keep secrets out of source control.
+
+Official links:
+- Next.js deployment: https://nextjs.org/docs/app/getting-started/deploying
+- Vercel pricing: https://vercel.com/pricing
+- Neon pricing: https://neon.com/pricing
+- Supabase pricing: https://supabase.com/pricing
+- Netlify pricing: https://www.netlify.com/pricing/
+- Render free services: https://render.com/docs/free
+- GitHub: https://github.com/
+
+**Production warning:** free-tier hosting is useful for learning and demos but is not automatically appropriate for a real shop. Confirm commercial terms, reliable database persistence, backup/restore, security, uptime, support, payment webhooks, privacy obligations, and expected traffic. A custom domain and some business services generally cost money.
+
+## 20. Deployment procedure
+
+1. Push reviewed code to a private GitHub repository.
+2. Create the production PostgreSQL project and securely store its connection string.
+3. Import the repository into the selected compatible host.
+4. Configure production environment variables in the host dashboard.
+5. Review the Prisma schema/migrations and run production migrations through a controlled release step; back up important data first.
+6. Deploy with Razorpay test credentials.
+7. Configure the HTTPS webhook URL and test signature verification, duplicate events, retries, and failures.
+8. Create the initial owner account through a secure one-time process; remove/disable setup endpoints afterward.
+9. Smoke-test catalog, cart, sandbox checkout, orders, stock, dashboard, roles, mobile layout, logs and error handling.
+10. Switch to live payment keys only after provider activation and owner approval.
+11. Configure custom-domain DNS exactly as the provider instructs, verify HTTPS and redirects, and update the payment webhook URL.
+12. Document deployment rollback, database restore, and payment/order reconciliation procedures.
+
+## 21. Testing and acceptance criteria
+
+### Functional
+- Catalog search, filters, variants, stock status, cart totals and coupon validation work.
+- Server recalculates prices and checks stock at checkout.
+- Guest/customer/staff/owner permissions are tested separately.
+- Payment success, failure, cancel, retry, invalid signature and duplicate webhook are handled.
+- COD eligibility and collection states are correct.
+- Order transitions, cancellations, returns, refunds and inventory adjustments follow documented rules.
+
+### Security
+- No secrets in repository or client bundle.
+- Unauthorized users cannot read customer data or call admin operations.
+- Input validation, rate limits, safe errors, audit logs and session handling are checked.
+- Payment signatures and webhook signatures are verified server-side.
+- Sensitive data is excluded from logs.
+
+### Operational
+- Lint and production build pass.
+- Migrations work on a clean staging database.
+- Backup/export and restore have been tested.
+- Monitoring and alerting are configured to the extent supported by the chosen plans.
+- Live URL, HTTPS, payment webhook and client sign-off are verified.
+
+## 22. Risks and mitigations
+
+- **Free tier is unsuitable for commercial use:** verify terms and budget a paid plan or migration.
+- **Overselling:** use transactions and revalidate stock.
+- **Payment/order mismatch:** verify signatures, handle webhooks idempotently, reconcile states.
+- **Leaked credentials:** use encrypted environment settings, least privilege and rotation.
+- **Incorrect tax or policy setup:** require owner/professional review before launch.
+- **Scope too large:** launch P0 first and add optional features only after testing.
+- **Provider limits or outage:** monitor quotas, maintain exports/backups, and document recovery.
+
+## 23. Open questions before build
+
+- Final store name, logo, owner details and public contact information?
+- Product categories, variants, SKUs, images, prices and stock source?
+- Confirmed shipping, pincode serviceability, COD restrictions and delivery partner?
+- Owner-approved returns/exchange policy?
+- Verified GST/tax requirements and invoice fields?
+- Who will own and pay for hosting, domain, payment-provider fees and business email?
+- Which free-tier commercial terms are acceptable?
+- Who handles customer support, refunds, backups, security updates and incident response?
+
+## 24. Sign-off checklist
+
+- [ ] Client approved P0/P1/P2 scope and policies.
+- [ ] Product data, prices, inventory and material claims verified.
+- [ ] Authentication and role boundaries tested.
+- [ ] Price calculation and stock operations are server-authoritative.
+- [ ] Razorpay sandbox, signatures, webhooks and failure cases pass.
+- [ ] COD, order states, cancellation and return flows pass.
+- [ ] Tax/invoice requirements reviewed by the business owner/professional.
+- [ ] Secrets are protected and no credentials are committed.
+- [ ] Database backup/restore procedure tested.
+- [ ] Hosting plan and commercial terms verified.
+- [ ] Production domain, HTTPS, monitoring and handover completed.
+- [ ] Owner approved launch.
