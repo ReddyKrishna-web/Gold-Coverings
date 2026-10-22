@@ -111,7 +111,7 @@ export function SiteHeader() {
           <a
             href={STORE_URL}
             className="btn-gold mt-5 w-full"
-            aria-label="Shop online at the Uma Fashions store"
+            aria-label="Shop online at the Krishna Jewellers store"
           >
             <ShoppingBag size={14} aria-hidden="true" /> Shop Online
           </a>

@@ -37,7 +37,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Gold Covering Jewellery & Ladies' Fancy Store",
   description:
-    "Explore gold-covering earrings, jhumkas, bangles, necklaces, bridal sets and fancy accessories at Uma Fashions, Hyderabad. Visit the store or shop online.",
+    "Explore gold-covering earrings, jhumkas, bangles, necklaces, bridal sets and fancy accessories at Krishna Jewellers, Hyderabad. Visit the store or shop online.",
   alternates: { canonical: "/" },
 };
 
@@ -60,7 +60,7 @@ export default async function HomePage() {
       <section className="section-pad bg-[var(--ivory)]">
         <div className="lux-container grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr]">
           <Reveal>
-            <p className="eyebrow">The Uma Fashions approach</p>
+            <p className="eyebrow">The Krishna Jewellers approach</p>
             <h2 className="display-lg mt-4 max-w-lg text-[var(--ink)]">
               Fine-looking gold, <span className="italic gold-text">honestly described.</span>
             </h2>
@@ -301,7 +301,7 @@ export default async function HomePage() {
               Built on a simple idea: <span className="italic gold-text">dress the moment.</span>
             </h2>
             <p className="mt-6 max-w-xl text-[0.95rem] font-light leading-[1.85] text-[rgba(14,11,7,0.68)]">
-              Uma Fashions began with the belief that a wedding, a festival or a first day at work
+              Krishna Jewellers began with the belief that a wedding, a festival or a first day at work
               deserves something beautiful — without the weight of solid-gold pricing. Our
               collection is chosen piece by piece, with an eye for finish, comfort and how it
               will look in photographs.

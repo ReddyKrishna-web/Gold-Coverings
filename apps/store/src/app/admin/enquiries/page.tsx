@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "Enquiries" };
 
 function waLink(phone: string, name: string) {
   const digits = phone.replace(/\D/g, "");
-  const text = encodeURIComponent(`Hello ${name}, this is Uma Fashions responding to your website enquiry.`);
+  const text = encodeURIComponent(`Hello ${name}, this is Krishna Jewellers responding to your website enquiry.`);
   return `https://wa.me/${digits}?text=${text}`;
 }
 

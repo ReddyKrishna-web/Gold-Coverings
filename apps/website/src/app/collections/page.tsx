@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Collections",
   description:
-    "Browse gold-covering earrings, nose pins, bangles, necklaces, bridal sets, rings, anklets and hair accessories at Uma Fashions.",
+    "Browse gold-covering earrings, nose pins, bangles, necklaces, bridal sets, rings, anklets and hair accessories at Krishna Jewellers.",
   alternates: { canonical: "/collections" },
 };
 

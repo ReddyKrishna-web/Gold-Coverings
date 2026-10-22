@@ -1,4 +1,4 @@
-// Uma Fashions — shared database for the marketing website and the store.
+// Krishna Jewellers — shared database for the marketing website and the store.
 // Money is always stored as integer paise (INR minor units).
 
 generator client {

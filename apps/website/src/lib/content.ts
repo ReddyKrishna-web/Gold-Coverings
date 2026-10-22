@@ -40,7 +40,7 @@ export async function getCollections(): Promise<WebsiteCollection[]> {
       shortName: row.name.split(" ")[0] ?? row.name,
       description: row.description,
       image: row.imageUrl ?? "/images/jewel-1.jpg",
-      imageAlt: row.imageAlt ?? `${row.name} at Uma Fashions`,
+      imageAlt: row.imageAlt ?? `${row.name} at Krishna Jewellers`,
       productCount: row._count.products,
     }));
   } catch (error) {

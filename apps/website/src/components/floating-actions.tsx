@@ -30,7 +30,7 @@ export function FloatingActions() {
         href={whatsappHref()}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat with Uma Fashions on WhatsApp"
+        aria-label="Chat with Krishna Jewellers on WhatsApp"
         className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--ink)] text-[var(--gold-300)] shadow-[0_12px_30px_-12px_rgba(14,11,7,0.8)] transition-transform hover:scale-105"
       >
         <MessageCircle size={20} aria-hidden="true" />

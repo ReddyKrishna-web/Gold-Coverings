@@ -61,7 +61,7 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
           WhatsApp and we will reply as soon as we can.
         </p>
         <a
-          href={whatsappHref("Hello Uma Fashions, I just sent an enquiry through the website.")}
+          href={whatsappHref("Hello Krishna Jewellers, I just sent an enquiry through the website.")}
           target="_blank"
           rel="noopener noreferrer"
           className="btn-outline-ink mt-6"

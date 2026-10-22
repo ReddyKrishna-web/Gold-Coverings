@@ -1,4 +1,4 @@
-# Uma Fashions — brand website + online store
+# Krishna Jewellers — brand website + online store
 
 A complete product for a gold-covering (gold-plated) jewellery and ladies' fancy
 store, built as **two deployments that stay in sync**:

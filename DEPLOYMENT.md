@@ -1,4 +1,4 @@
-# Deployment runbook — Uma Fashions
+# Deployment runbook — Krishna Jewellers
 
 This deploys **two Next.js apps from one repository** against **one PostgreSQL
 database**, then wires their URLs together and verifies the integration.
@@ -113,7 +113,7 @@ Environment variables:
 | `AUTH_SECRET` | strong random (website does not sign in, but keep consistent) |
 | `OWNER_EMAIL` | where enquiry notifications go |
 | `RESEND_API_KEY` | optional |
-| `EMAIL_FROM` | verified sending identity, e.g. `Uma Fashions <hello@umafashions.in>` |
+| `EMAIL_FROM` | verified sending identity, e.g. `Krishna Jewellers <hello@umafashions.in>` |
 
 ### Project B — Store + admin
 

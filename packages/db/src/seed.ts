@@ -241,7 +241,7 @@ const gallery = [
 ];
 
 async function main() {
-  console.log("Seeding Uma Fashions…");
+  console.log("Seeding Krishna Jewellers…");
   if (process.env.NODE_ENV === "production" && process.env.ALLOW_PROD_SEED !== "true") {
     throw new Error("Refusing to seed with NODE_ENV=production. Set ALLOW_PROD_SEED=true only for a fresh demo.");
   }
@@ -277,7 +277,7 @@ async function main() {
     prisma.user.create({
       data: {
         email: ownerEmail.toLowerCase(),
-        name: "Uma Devi",
+        name: "Krishna N.",
         phone: "+919876543210",
         role: "OWNER",
         passwordHash: await bcrypt.hash(ownerPassword, 12),
@@ -301,7 +301,7 @@ async function main() {
         name: category.name,
         description: category.blurb,
         imageUrl: IMG(category.image),
-        imageAlt: `${category.name} — gold covering jewellery at Uma Fashions`,
+        imageAlt: `${category.name} — gold covering jewellery at Krishna Jewellers`,
         sortOrder: index,
       },
     });
@@ -371,7 +371,7 @@ async function main() {
     await prisma.galleryImage.create({
       data: {
         url: IMG(item.image),
-        alt: `${item.caption} — Uma Fashions lookbook`,
+        alt: `${item.caption} — Krishna Jewellers lookbook`,
         caption: item.caption,
         sortOrder: index,
       },

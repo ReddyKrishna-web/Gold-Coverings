@@ -45,7 +45,7 @@ export function RetryPayment({
         key: result.razorpay.keyId,
         amount: amountPaise,
         currency: "INR",
-        name: "Uma Fashions",
+        name: "Krishna Jewellers",
         description: result.razorpay.description,
         order_id: result.razorpay.orderId,
         theme: { color: "#D4AF37" },

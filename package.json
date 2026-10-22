@@ -2,7 +2,7 @@
   "name": "uma-fashions",
   "version": "1.0.0",
   "private": true,
-  "description": "Uma Fashions — luxury gold-covering jewellery brand website and online store",
+  "description": "Krishna Jewellers — luxury gold-covering jewellery brand website and online store",
   "workspaces": [
     "apps/*",
     "packages/*"

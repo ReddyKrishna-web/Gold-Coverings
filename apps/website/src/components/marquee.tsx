@@ -6,7 +6,7 @@ export function Marquee() {
   return (
     <div
       className="marquee border-y border-[rgba(212,175,55,0.24)] bg-[var(--ink)] py-5"
-      aria-label="Collections at Uma Fashions"
+      aria-label="Collections at Krishna Jewellers"
     >
       <div className="marquee__track">
         {[0, 1].map((copy) => (

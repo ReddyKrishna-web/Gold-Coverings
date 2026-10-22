@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: collection.description,
     alternates: { canonical: `/collections/${collection.slug}` },
     openGraph: {
-      title: `${collection.name} · Uma Fashions`,
+      title: `${collection.name} · Krishna Jewellers`,
       description: collection.description,
       images: [{ url: collection.image, alt: collection.imageAlt }],
     },
@@ -62,7 +62,7 @@ export default async function CollectionPage({ params }: Params) {
                 Shop this collection <ArrowUpRight size={14} aria-hidden="true" />
               </a>
               <a
-                href={whatsappHref(`Hello Uma Fashions, I'd like to see more from the ${collection.name} collection.`)}
+                href={whatsappHref(`Hello Krishna Jewellers, I'd like to see more from the ${collection.name} collection.`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline"
@@ -121,7 +121,7 @@ export default async function CollectionPage({ params }: Params) {
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <a
-                  href={whatsappHref(`Hello Uma Fashions, please share the latest ${collection.name} designs.`)}
+                  href={whatsappHref(`Hello Krishna Jewellers, please share the latest ${collection.name} designs.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-gold"

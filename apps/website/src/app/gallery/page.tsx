@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Lookbook",
   description:
-    "A visual lookbook of gold-covering jewellery from Uma Fashions — bridal sets, jhumkas, bangles and everyday pieces.",
+    "A visual lookbook of gold-covering jewellery from Krishna Jewellers — bridal sets, jhumkas, bangles and everyday pieces.",
   alternates: { canonical: "/gallery" },
 };
 

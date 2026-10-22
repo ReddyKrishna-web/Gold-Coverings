@@ -13,7 +13,7 @@ function escapeHtml(value: string): string {
 
 async function sendMail(mail: Mail): Promise<boolean> {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.EMAIL_FROM ?? "Uma Fashions <onboarding@resend.dev>";
+  const from = process.env.EMAIL_FROM ?? "Krishna Jewellers <onboarding@resend.dev>";
 
   if (!apiKey) {
     console.info(`[email skipped] ${mail.subject}`);

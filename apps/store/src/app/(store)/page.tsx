@@ -188,7 +188,7 @@ export default async function StoreHomePage() {
                 Shop bridal sets <ArrowRight size={14} aria-hidden="true" />
               </Link>
               <a
-                href={whatsappHref("Hello Uma Fashions, I'd like help choosing a bridal set.")}
+                href={whatsappHref("Hello Krishna Jewellers, I'd like help choosing a bridal set.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline"

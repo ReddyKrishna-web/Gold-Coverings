@@ -240,7 +240,7 @@ export default async function OrderPage({ params, searchParams }: Props) {
                 </a>{" "}
                 or{" "}
                 <a
-                  href={whatsappHref(`Hello Uma Fashions, I need help with order ${order.orderNumber}.`)}
+                  href={whatsappHref(`Hello Krishna Jewellers, I need help with order ${order.orderNumber}.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline underline-offset-2"

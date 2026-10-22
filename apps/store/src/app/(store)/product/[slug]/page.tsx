@@ -237,7 +237,7 @@ export default async function ProductPage({ params, searchParams }: Props) {
           </div>
 
           <a
-            href={whatsappHref(`Hello Uma Fashions, I have a question about the ${product.name}.`)}
+            href={whatsappHref(`Hello Krishna Jewellers, I have a question about the ${product.name}.`)}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-5 inline-flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.16em] text-[var(--gold-900)] hover:underline"

@@ -1,5 +1,5 @@
 /**
- * Uma Fashions — shared brand source of truth.
+ * Krishna Jewellers — shared brand source of truth.
  *
  * Every store detail that appears on BOTH the marketing website and the
  * shopping application lives here. Replace the values marked
@@ -9,16 +9,16 @@
  */
 
 export const BRAND = {
-  name: "Uma Fashions",
-  shortName: "Uma",
-  monogram: "UF",
+  name: "Krishna Jewellers",
+  shortName: "Krishna",
+  monogram: "RK",
   tagline: "Where Every Shine Tells a Story",
   category: "Gold Covering & Ladies' Fancy Store",
   description:
     "Gold-covering (gold-plated) jewellery and ladies' fancy accessories — earrings, jhumkas, bangles, necklaces, bridal sets and more.",
   // TODO(client): confirm the public business name, logo and owner details.
   owner: {
-    name: "Uma Devi",
+    name: "Krishna N.",
     role: "Proprietor",
   },
   contact: {

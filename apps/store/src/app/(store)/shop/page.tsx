@@ -270,7 +270,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
                     Clear filters
                   </Link>
                   <a
-                    href={whatsappHref("Hello Uma Fashions, I am looking for a specific piece.")}
+                    href={whatsappHref("Hello Krishna Jewellers, I am looking for a specific piece.")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-gold"

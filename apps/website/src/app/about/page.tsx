@@ -16,9 +16,9 @@ import { Ornament, Reveal, SectionHeading } from "@uma/ui";
 export const metadata: Metadata = {
   title: "Our Story",
   description:
-    "Uma Fashions is a family-run gold-covering jewellery and ladies' fancy store in Hyderabad, chosen for bridal, festive and everyday moments.",
+    "Krishna Jewellers is a family-run gold-covering jewellery and ladies' fancy store in Hyderabad, chosen for bridal, festive and everyday moments.",
   alternates: { canonical: "/about" },
-  openGraph: { images: [{ url: "/images/jewel-4.jpg", alt: "Uma Fashions jewellery" }] },
+  openGraph: { images: [{ url: "/images/jewel-4.jpg", alt: "Krishna Jewellers jewellery" }] },
 };
 
 export default function AboutPage() {
@@ -44,7 +44,7 @@ export default function AboutPage() {
             <div className="relative aspect-[4/5] overflow-hidden border border-[rgba(212,175,55,0.3)]">
               <Image
                 src="/images/jewel-1.jpg"
-                alt="Gold-covering jewellery displayed at Uma Fashions"
+                alt="Gold-covering jewellery displayed at Krishna Jewellers"
                 fill
                 priority
                 sizes="(max-width: 1024px) 90vw, 45vw"
@@ -175,7 +175,7 @@ export default function AboutPage() {
             <div className="relative aspect-square overflow-hidden border border-[rgba(122,90,18,0.25)]">
               <Image
                 src="/images/jewel-3.jpg"
-                alt="Stacked gold-tone bangles from the Uma Fashions collection"
+                alt="Stacked gold-tone bangles from the Krishna Jewellers collection"
                 fill
                 sizes="(max-width: 1024px) 90vw, 40vw"
                 className="object-cover"
