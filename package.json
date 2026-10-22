@@ -15,6 +15,7 @@
     "dev:website": "npm run dev -w @uma/website",
     "dev:store": "npm run dev -w @uma/store",
     "build": "npm run build -w @uma/website && npm run build -w @uma/store",
+    "start": "npm run start -w @uma/store",
     "build:website": "npm run build -w @uma/website",
     "build:store": "npm run build -w @uma/store",
     "lint": "npm run lint -w @uma/website && npm run lint -w @uma/store",
